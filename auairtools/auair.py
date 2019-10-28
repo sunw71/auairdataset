@@ -105,10 +105,17 @@ class AUAIR(object):
                 indices.append(i)
         return indices        
 
-    #def get_index_by_catName(self, catName):
-    #    raise NotImplemented    
 
     def get_index_by_alt(self, alt, offset=100):
+        """Get index of images/annotations captured at certain altitude.
+        
+        Args:
+            alt (float): The fligh altitude. In millimeter.
+            offset (int, optional): To create a range for target altitude. Defaults to 100.
+        
+        Returns:
+            List of int: List of image/annotation indices.
+        """
         indices = []
         for i in range(len(self.image_names)):
             ann = self.get_data_by_index(i, ret_img = False)
@@ -117,8 +124,14 @@ class AUAIR(object):
                 indices.append(i)
         return indices   
 
-    def showImg(self, img):
-        raise NotImplemented
+    def display_image(self, id_or_name):
+        if type(id_or_name)==int:
+            img, ann =  self.get_data_by_index(id_or_name)
+            cv2.imshow("Name: "+ann['image_name']+', Altitude: '+str(ann['altitude']), img)
+        else:
+            img, ann =  self.get_data_by_name(id_or_name)
+            cv2.imshow("Name: "+ann['image_name']+', Altitude: '+str(ann['altitude']), img)
+        cv2.waitKey()        
 
-    def showAnnot(self, img):
+    def display_bbox(self, img):
         raise NotImplemented    
