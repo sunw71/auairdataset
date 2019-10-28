@@ -29,7 +29,7 @@ class AUAIR(object):
         self.annotations = dataset['annotations']
         self.image_names = onlyimgs
         self.data_folder = data_folder
-
+        self.categories  = dataset['categories']
 
         '''
         print('Sanity check...')
@@ -124,14 +124,46 @@ class AUAIR(object):
                 indices.append(i)
         return indices   
 
+
     def display_image(self, id_or_name):
+        """Display image which has given name or id.
+        
+        Args:
+            id_or_name (int or name): Id (index) or name of the image.
+        """
+
         if type(id_or_name)==int:
             img, ann =  self.get_data_by_index(id_or_name)
             cv2.imshow("Name: "+ann['image_name']+', Altitude: '+str(ann['altitude']), img)
         else:
             img, ann =  self.get_data_by_name(id_or_name)
             cv2.imshow("Name: "+ann['image_name']+', Altitude: '+str(ann['altitude']), img)
-        cv2.waitKey()        
+        cv2.waitKey() 
+        cv2.destroyAllWindows()       
 
-    def display_bbox(self, img):
-        raise NotImplemented    
+
+    def display_bboxes(self, id_or_name):
+        """Display image with object bounding boxes which has given name or id.
+        
+        Args:
+            id_or_name (int or name): Id (index) or name of the image.
+        """
+
+        if type(id_or_name)==int:
+            img, ann =  self.get_data_by_index(id_or_name)
+        else:
+            img, ann =  self.get_data_by_name(id_or_name)
+
+        for bbox in ann['bbox']:
+            x = bbox['left']
+            y = bbox['top']
+            w = bbox['width']
+            h = bbox['height']
+            label = self.categories[bbox['class']]
+            cv2.putText(img, label, (x, y+25), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 0), thickness = 2, lineType=cv2.LINE_AA) 
+            cv2.rectangle(img, (x, y), (x+w, y+h), (255, 255, 0), 2)
+        
+        cv2.imshow("Name: "+ann['image_name']+', Altitude: '+str(ann['altitude']), img)
+        cv2.waitKey() 
+        cv2.destroyAllWindows()      
+    

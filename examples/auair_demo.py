@@ -64,13 +64,28 @@ print("Done")
 ##############################################################
 ######### Display images for given key index or name #########
 ##############################################################
-ret_index = 5
+ret_index = 7
 print("Display image which has index %d:" %ret_index)
 auairdataset.display_image(ret_index)
 
-ret_index = "frame_20190905112522_x_0004462.jpg"
+ret_name = "frame_20190905112522_x_0004462.jpg"
 print("Display image which has name %s:" %ret_name)
 auairdataset.display_image(ret_name)
+
+print("Done")
+##############################################################
+
+
+##############################################################
+######## Display images with object bounding boxes  ##########
+##############################################################
+ret_index = 7
+print("Display image which has index %d:" %ret_index)
+auairdataset.display_bboxes(ret_index)
+
+ret_name = "frame_20190905112522_x_0004462.jpg"
+print("Display image which has name %s:" %ret_name)
+auairdataset.display_bboxes(ret_name)
 
 print("Done")
 ##############################################################
