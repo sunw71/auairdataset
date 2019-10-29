@@ -1,8 +1,8 @@
 from auairtools.auair import AUAIR
 
 # Paths to annotation file and source data.
-annotFile = '/home/ilker/Desktop/baum/workspace/DATASET/annotations.json'
-dataDir = '/home/ilker/Desktop/baum/workspace/DATASET/images'
+annotFile = 'auair_subset/annotations.json'
+dataDir = 'auair_subset/images'
 
 # Create a AUAIR object.
 auairdataset = AUAIR(annotation_file=annotFile, data_folder = dataDir)
@@ -22,7 +22,7 @@ print("Done")
 ##############################################################
 ########## Get image and annotation for given name ###########
 ##############################################################
-ret_name = "frame_20190905112522_x_0004462.jpg"
+ret_name = "frame_20190829091111_x_0003112.jpg"
 print("Get image and annotation with name %s" %ret_name)
 img, ann = auairdataset.get_data_by_name(ret_name)
 print('Image shape: ', img.shape)
@@ -49,7 +49,7 @@ print("Done")
 ##############################################################
 ###### Get index of images captured in certain altitudes #####
 ##############################################################
-ret_alt = 5000
+ret_alt = 20000 # 20000 mm -> 20 meters
 print("Get index by altitude (mm) %s:" %ret_alt)
 indices = auairdataset.get_index_by_alt(ret_alt)
 print('Indices: ', indices[:3])
@@ -68,7 +68,7 @@ ret_index = 7
 print("Display image which has index %d:" %ret_index)
 auairdataset.display_image(ret_index)
 
-ret_name = "frame_20190905112522_x_0004462.jpg"
+ret_name = "frame_20190829091111_x_0003112.jpg"
 print("Display image which has name %s:" %ret_name)
 auairdataset.display_image(ret_name)
 
@@ -83,7 +83,7 @@ ret_index = 7
 print("Display image which has index %d:" %ret_index)
 auairdataset.display_bboxes(ret_index)
 
-ret_name = "frame_20190905112522_x_0004462.jpg"
+ret_name = "frame_20190829091111_x_0003112.jpg"
 print("Display image which has name %s:" %ret_name)
 auairdataset.display_bboxes(ret_name)
 
