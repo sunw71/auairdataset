@@ -4,7 +4,7 @@ The AU-AIR is a multi-modal aerial dataset captured by a UAV. Having visual data
 
 https://bozcani.github.io/AU-AIR-dataset.html
 
-![alt text](https://raw.githubusercontent.com/bozcani/auairdataset/master/intro.jpg =400x) 
+![alt text](https://raw.githubusercontent.com/bozcani/auairdataset/master/intro.jpg=400x) 
 
 ### Specifications
 - 8 raw RGB videos (more than 2 hours in total)
