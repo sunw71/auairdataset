@@ -24,7 +24,9 @@ You will need common dependencies like `numpy` and `opencv`.
 ## Installation
 To install the package from source, simply clone or download the repository to your machine
 `git clone https://github.com/bozcani/auairdataset`
+
 `cd auairdataset`
+
 `python setup.py install`
 
 ## References
