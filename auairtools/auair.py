@@ -30,6 +30,7 @@ class AUAIR(object):
         self.image_names = onlyimgs
         self.data_folder = data_folder
         self.categories  = dataset['categories']
+        self.num_samples = len(self.annotations)
 
         '''
         print('Sanity check...')
