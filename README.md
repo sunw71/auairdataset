@@ -15,7 +15,9 @@ https://bozcani.github.io/AU-AIR-dataset.html
 
 ### Download
 Please download both the AU-AIR images and annotations to run the demo and use the API:
+
 Images: https://drive.google.com/open?id=1pJ3xfKtHiTdysX5G3dxqKTdGESOBYCxJ (2.2 GB)
+
 Annotations: https://drive.google.com/open?id=1boGF0L6olGe_Nu7rd1R8N7YmQErCb0xA (3.9 MB)
 
 ## Dependencies
