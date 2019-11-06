@@ -4,6 +4,8 @@ from os import listdir
 from os.path import isfile, join, splitext
 import cv2
 
+from auairtools.utils import TimeStamp
+
 class AUAIR(object):
 
     def __init__(self, annotation_file, data_folder):
@@ -32,6 +34,7 @@ class AUAIR(object):
         self.categories  = dataset['categories']
         self.num_samples = len(self.annotations)
 
+        self.sorted_annotations = self._sort_by_time(self.annotations)
         '''
         print('Sanity check...')
         tic = time.time()
@@ -168,3 +171,7 @@ class AUAIR(object):
         cv2.waitKey() 
         cv2.destroyAllWindows()      
     
+
+    def _sort_by_time(self, annotations):
+        newlist = sorted(annotations, key=lambda k: TimeStamp(k['time'])) 
+        return newlist
