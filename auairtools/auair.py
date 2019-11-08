@@ -4,6 +4,8 @@ from os import listdir
 from os.path import isfile, join, splitext
 import cv2
 
+from auairtools.utils import TimeStamp
+
 class AUAIR(object):
 
     def __init__(self, annotation_file, data_folder):
@@ -31,7 +33,7 @@ class AUAIR(object):
         self.data_folder = data_folder
         self.categories  = dataset['categories']
         self.num_samples = len(self.annotations)
-
+        self.sorted_annotations = None
         '''
         print('Sanity check...')
         tic = time.time()
@@ -168,3 +170,76 @@ class AUAIR(object):
         cv2.waitKey() 
         cv2.destroyAllWindows()      
     
+
+    def _sort_by_time(self, annotations):
+        newlist = sorted(annotations, key=lambda k: TimeStamp(k['time'])) 
+        return newlist
+
+    def get_frame_seqeunces(self, seq_len=5, window_gap=200, overlap=4):
+
+        self.sorted_annotations = self._sort_by_time(self.annotations)
+
+
+        samples = []
+        
+        i = 0
+
+        # Create TimeStamp for given window gap.
+        window_t = TimeStamp({'year': 0,
+            'month': 0,
+            'day': 0,
+            'hour': 0,
+            'min': 0,
+            'sec': 0,
+            'ms': window_gap})
+
+        # Iterate over sorted annotations (sorted by time).
+        while i<self.num_samples:
+            sample = []
+            
+            # Current length of sample seq.
+            curr_length = 0
+
+            # First frame of the sample seq.
+            first_frame = self.sorted_annotations[i]
+            sample.append(first_frame)
+            curr_t = TimeStamp(first_frame['time'])
+
+            if i+seq_len>=self.num_samples:
+                break
+
+            skip_flag = False
+            for j in range(1, seq_len):
+                next_frame = self.sorted_annotations[i+j]
+                next_t  = TimeStamp(next_frame['time'])
+                diff_t = next_t-curr_t
+
+                if diff_t <= window_t:
+                    sample.append(next_frame)
+                    curr_t = next_t
+
+                else:
+                    skip_flag = True
+                    #print("[INFO] Frames skipped due to large time difference:") 
+                    #for s in sample:
+                    #    print(s)
+                    #print("Too far:", next_frame)    
+                    #print() 
+                    break 
+
+            if(len(sample)!=seq_len):
+                assert RuntimeError("Sample length (%d) does not equal to seq_len (%d)" % (len(sample), seq_len))           
+
+            else:
+                #print() 
+                #for s in sample:
+                #    print(s)
+                #print()                 
+                samples.append(sample)
+
+            if skip_flag==False:
+                i += seq_len - overlap
+            elif skip_flag==True:
+                i += j    
+
+        return samples
