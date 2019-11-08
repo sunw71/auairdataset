@@ -13,6 +13,22 @@ class TestTimeStamp(unittest.TestCase):
             'sec': 3,
             'ms': 12000}
 
+        self.time_dict_2 = {'year': 2019,
+            'month': 11,
+            'day': 7,
+            'hour': 11,
+            'min': 4,
+            'sec': 3,
+            'ms': 11800}    
+
+        self.time_dict_3 = {'year': 2012,
+            'month': 10,
+            'day': 3,
+            'hour': 12,
+            'min': 2,
+            'sec': 3,
+            'ms': 11800}     
+
 
 
     def test_constructor(self):
@@ -32,6 +48,18 @@ class TestTimeStamp(unittest.TestCase):
     def test_print(self):
         t = TimeStamp(self.time_dict_1)
         self.assertEqual(str(t), 'TimeStamp: {\'year\': 2019, \'month\': 11, \'day\': 7, \'hour\': 11, \'min\': 4, \'sec\': 3, \'ms\': 12000}', "Expected strings to be same.")
+
+
+    def test_sub(self):
+        t1 = TimeStamp(self.time_dict_1)
+        t2 = TimeStamp(self.time_dict_2)
+        t3 = TimeStamp(self.time_dict_3)
+
+        self.assertEqual(str(t1-t2), 'TimeStamp: {\'year\': 0, \'month\': 0, \'day\': 0, \'hour\': 0, \'min\': 0, \'sec\': 0, \'ms\': 200}', "Expected TimeStamps to be same.")
+        self.assertEqual(str(t1-t3), 'TimeStamp: {\'year\': 7, \'month\': 1, \'day\': 4, \'hour\': -1, \'min\': 2, \'sec\': 0, \'ms\': 200}', "Expected TimeStamps to be same.")
+        self.assertEqual(str(t2-t1), 'TimeStamp: {\'year\': 0, \'month\': 0, \'day\': 0, \'hour\': 0, \'min\': 0, \'sec\': 0, \'ms\': -200}', "Expected TimeStamps to be same.")
+        self.assertEqual(str(t1-t1), 'TimeStamp: {\'year\': 0, \'month\': 0, \'day\': 0, \'hour\': 0, \'min\': 0, \'sec\': 0, \'ms\': 0}', "Expected TimeStamps to be same.")
+
 
 if __name__ == '__main__':
     unittest.main()
