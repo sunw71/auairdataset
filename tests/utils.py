@@ -69,10 +69,22 @@ class TestTimeStamp(unittest.TestCase):
         self.assertEqual(str(t1-t1), 'TimeStamp: {\'year\': 0, \'month\': 0, \'day\': 0, \'hour\': 0, \'min\': 0, \'sec\': 0, \'ms\': 0}', "Expected TimeStamps to be same.")
 
     def test_abs(self):
+        ''' Test absoluate overloaded function. '''
         t1 = TimeStamp(self.time_dict_1)
         t4 = TimeStamp(self.time_dict_4) 
         self.assertEqual(str(abs(t1)), 'TimeStamp: {\'year\': 2019, \'month\': 11, \'day\': 7, \'hour\': 11, \'min\': 4, \'sec\': 3, \'ms\': 12000}', "Expected TimeStamps to be same.")
         self.assertEqual(str(abs(t4)), 'TimeStamp: {\'year\': 2012, \'month\': 10, \'day\': 3, \'hour\': 12, \'min\': 2, \'sec\': 3, \'ms\': 11800}', "Expected TimeStamps to be same.")
+
+    def test_le(self):
+        ''' Test less or equal overloaded operation. '''
+        t1 = TimeStamp(self.time_dict_1)
+        t2 = TimeStamp(self.time_dict_2)
+        t3 = TimeStamp(self.time_dict_3)        
+        t4 = TimeStamp(self.time_dict_4) 
+        self.assertTrue(t1>=t1)
+        self.assertTrue(t1>=t2)
+        self.assertTrue(t2>=t3)
+        self.assertTrue(t3>=t4)
 
 
 if __name__ == '__main__':
