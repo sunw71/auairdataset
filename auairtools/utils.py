@@ -17,8 +17,27 @@ class TimeStamp:
             'sec': self.sec,
             'ms': self.ms}
 
+        return 'TimeStamp: ' + str(time_dict) 
 
-        return 'TimeStamp: ' + str(time_dict)   
+    def __abs__(self):
+        year_abs = abs(self.year) 
+        month_abs = abs(self.month) 
+        day_abs = abs(self.day) 
+        hour_abs = abs(self.hour) 
+        mins_abs = abs(self.mins) 
+        sec_abs = abs(self.sec) 
+        ms_abs = abs(self.ms)
+        
+        time_dict = {'year': year_abs,
+            'month': month_abs,
+            'day': day_abs,
+            'hour': hour_abs,
+            'min': mins_abs,
+            'sec': sec_abs,
+            'ms': ms_abs}
+
+        return TimeStamp(time_dict)              
+
 
     def __lt__(self, otherTimeStamp):
         if self.year < otherTimeStamp.year:
