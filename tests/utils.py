@@ -81,10 +81,13 @@ class TestTimeStamp(unittest.TestCase):
         t2 = TimeStamp(self.time_dict_2)
         t3 = TimeStamp(self.time_dict_3)        
         t4 = TimeStamp(self.time_dict_4) 
-        self.assertTrue(t1>=t1)
-        self.assertTrue(t1>=t2)
-        self.assertTrue(t2>=t3)
-        self.assertTrue(t3>=t4)
+        self.assertTrue(t1<=t1)
+        self.assertFalse(t1<=t2)
+        self.assertTrue(t2<=t1)
+        self.assertFalse(t2<=t3)
+        self.assertTrue(t3<=t2)
+        self.assertFalse(t3<=t4)
+        self.assertTrue(t4<=t3)
 
 
 if __name__ == '__main__':
