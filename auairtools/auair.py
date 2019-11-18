@@ -141,7 +141,7 @@ class AUAIR(object):
         else:
             img, ann =  self.get_data_by_name(id_or_name)
             cv2.imshow("Name: "+ann['image_name']+', Altitude: '+str(ann['altitude']), img)
-        cv2.waitKey() 
+        cv2.waitKey(0) 
         cv2.destroyAllWindows()       
 
 
