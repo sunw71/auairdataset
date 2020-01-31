@@ -2,7 +2,7 @@
 ## Dataset
 The AU-AIR is a multi-modal aerial dataset captured by a UAV. Having visual data, object annotations, and flight data (time, GPS, altitude, IMU sensor data, velocities), AU-AIR meets vision and robotics for UAVs.
 
-https://bozcani.github.io/AU-AIR-dataset.html
+https://bozcani.github.io/auairdataset
 
 ![alt text](https://raw.githubusercontent.com/bozcani/auairdataset/master/intro.jpg) 
 
