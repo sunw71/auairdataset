@@ -4,7 +4,7 @@ data = open(r'annotations.json') #Pass in the path for AU-AIR annotation file
 ann_file = json.load(data)
 ann_list = ann_file['annotations']
 b = [i.get('bbox') for i in ann_list] #b is a list which contains the bbox parameters for YOLO Conversion
-
+b = b[:10]
 # print(b)
 
 name = []
@@ -12,7 +12,7 @@ for i in ann_file['annotations']:
     name.append(i.get('image_name'))
 
 # print(name)
-YOLO_LABELS_PATH = r'yolo_annotation_path'  # Pass in a path to save the YOLO Annotation Files
+YOLO_LABELS_PATH = r'yolo_annotation_folder/'  # Pass in a folder to save the YOLO Annotation Files
 
 for a in range(0,len(b)):
     c = b[a]
